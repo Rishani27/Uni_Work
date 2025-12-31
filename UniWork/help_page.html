@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UniWork — Help Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.18);
+      --text: #eaf0ff;
+      --muted: #b9c3d6;
+      --accent: #7c5cff;
+      --accent-2: #00d4ff;
+      --success: #2ecc71;
+      --warning: #f1c40f;
+      --danger: #ff5c7c;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(124, 92, 255, 0.25), transparent 60%),
+        radial-gradient(900px 500px at 90% 20%, rgba(0, 212, 255, 0.25), transparent 60%),
+        linear-gradient(180deg, #0b1220 0%, #0b1220 100%);
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: saturate(140%) blur(10px);
+      background: linear-gradient(180deg, rgba(11, 18, 32, 0.85), rgba(11, 18, 32, 0.65));
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .logo-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: var(--shadow);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .logo-title {
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .header-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 10px;
+    }
+    .pill {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+    .pill:hover { border-color: rgba(255,255,255,0.35); transform: translateY(-1px); }
+
+    /* Main container */
+    .container {
+      max-width: 1100px;
+      margin: 24px auto 60px;
+      padding: 0 20px;
+    }
+
+    /* Hero / search */
+    .hero {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 0.2px;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .search {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+    .search input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      outline: none;
+      transition: 0.2s ease;
+    }
+    .search input::placeholder { color: #9fb0cc; }
+    .search input:focus { border-color: rgba(124, 92, 255, 0.6); box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.15); }
+    .search button {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 700;
+      color: #0b1220;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .search button:hover { filter: brightness(1.05); transform: translateY(-1px); }
+
+    /* Grid layout */
+    .grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+    .card p { color: var(--muted); }
+
+    /* Getting started steps */
+    .steps {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px dashed var(--border);
+      background: rgba(255,255,255,0.05);
+    }
+    .step .badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #0b1220;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+    .step h3 {
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* FAQ */
+    .faq {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+    .faq-button {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 14px;
+      background: transparent;
+      color: var(--text);
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .faq-button:focus-visible {
+      outline: 2px solid rgba(124, 92, 255, 0.7);
+      outline-offset: 2px;
+    }
+    .faq-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: #0b1220;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-weight: 900;
+    }
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+      border-top: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+    }
+    .faq-content-inner {
+      padding: 12px 14px 16px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .faq-item.open .faq-content { max-height: 240px; }
+
+    /* Contact form */
+    .form {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+    .label {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .input, .textarea, .select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      outline: none;
+      transition: 0.2s ease;
+    }
+    .textarea { min-height: 120px; resize: vertical; }
+    .input:focus, .textarea:focus, .select:focus {
+      border-color: rgba(124, 92, 255, 0.6);
+      box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.15);
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 4px;
+    }
+    .btn {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.primary {
+      border: none;
+      color: #0b1220;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    /* Search results */
+    .results {
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+    }
+    .result {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+    }
+    .result b { color: var(--text); }
+
+    /* Footer */
+    .footer {
+      margin-top: 28px;
+      padding: 18px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      font-size: 13px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 6px rgba(46, 204, 113, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="header-inner">
+      <a class="logo" href="#" aria-label="UniWork Home">
+        <div class="logo-badge">UW</div>
+        <div class="logo-title">UniWork Help Center</div>
+      </a>
+      <nav class="header-actions" aria-label="Quick links">
+        <a class="pill" href="#getting-started">Getting started</a>
+        <a class="pill" href="#faqs">FAQs</a>
+        <a class="pill" href="#contact">Contact support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" id="main" tabindex="-1">
+    <!-- Hero + Search -->
+    <section class="hero" aria-label="Search help">
+      <h1>How can we help you today?</h1>
+      <p>Search topics, browse FAQs, or reach out—UniWork is here to support your journey.</p>
+      <form class="search" id="searchForm" role="search" aria-label="Search help topics">
+        <input id="searchInput" type="search" placeholder="Search: login, profile, calendar, jobs…" aria-label="Search help" />
+        <button type="submit" aria-label="Run search">Search</button>
+      </form>
+      <div class="results" id="results" aria-live="polite"></div>
+    </section>
+
+    <div class="grid">
+      <!-- Left column -->
+      <section class="card" id="getting-started" aria-labelledby="gs-title">
+        <h2 id="gs-title">Getting started</h2>
+        <p>Set up your account, personalize your profile, and explore core features like calendar, jobs, and wallet.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="badge" aria-hidden="true">1</div>
+            <div>
+              <h3>Create your account</h3>
+              <p>Sign up with your university email, verify your address, and log in to your dashboard.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="badge" aria-hidden="true">2</div>
+            <div>
+              <h3>Complete your profile</h3>
+              <p>Add your name, contact number, skills, and a short bio. Aim for 100% completion to unlock recommendations.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="badge" aria-hidden="true">3</div>
+            <div>
+              <h3>Explore your dashboard</h3>
+              <p>Use the calendar for events, check notifications, browse jobs, and track your wallet balance in LKR.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="badge" aria-hidden="true">4</div>
+            <div>
+              <h3>Apply and engage</h3>
+              <p>Apply to roles, message coordinators, and keep your schedule updated to stay on top of deadlines.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right column -->
+      <section class="card" id="faqs" aria-labelledby="faq-title">
+        <h2 id="faq-title">FAQs</h2>
+        <div class="faq" role="list">
+          <article class="faq-item" role="listitem">
+            <button class="faq-button" aria-expanded="false" aria-controls="faq1">
+              <span>How do I reset my password?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div id="faq1" class="faq-content" role="region" aria-label="Reset password answer">
+              <div class="faq-content-inner">
+                Go to the login page and select “Forgot password”. Enter your registered email to receive a reset link. If you don’t see the email, check spam or try again after a few minutes.
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button class="faq-button" aria-expanded="false" aria-controls="faq2">
+              <span>Why is my profile completion below 100%?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div id="faq2" class="faq-content" role="region" aria-label="Profile completion answer">
+              <div class="faq-content-inner">
+                Ensure you’ve added your contact number, skills, education, and a profile photo. Some modules—like wallet setup or calendar preferences—also contribute to completion.
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button class="faq-button" aria-expanded="false" aria-controls="faq3">
+              <span>How do I add events to the calendar?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div id="faq3" class="faq-content" role="region" aria-label="Calendar events answer">
+              <div class="faq-content-inner">
+                Open the Calendar tab and click a date to add an event. Use tags for classes, deadlines, or interviews. Event dots and highlights help you spot busy days quickly.
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button class="faq-button" aria-expanded="false" aria-controls="faq4">
+              <span>Which currency does the wallet use?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div id="faq4" class="faq-content" role="region" aria-label="Wallet currency answer">
+              <div class="faq-content-inner">
+                The wallet displays balances and transactions in LKR. You can export statements and filter by date or category.
+              </div>
+            </div>
+          </article>
+
+          <article class="faq-item" role="listitem">
+            <button class="faq-button" aria-expanded="false" aria-controls="faq5">
+              <span>How do I apply for jobs?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div id="faq5" class="faq-content" role="region" aria-label="Apply for jobs answer">
+              <div class="faq-content-inner">
+                Visit the Jobs tab, filter by role or location, and open a listing to review details. Click “Apply” and attach your resume or portfolio if required.
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- Contact support -->
+    <section class="card" id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact support</h2>
+      <p>Describe your issue clearly—include screenshots or steps to reproduce if possible. We’ll get back to you promptly.</p>
+      <form class="form" id="contactForm" novalidate>
+        <div class="field">
+          <label class="label" for="topic">Topic</label>
+          <select id="topic" class="select" required>
+            <option value="">Select a topic…</option>
+            <option value="account">Account & login</option>
+            <option value="profile">Profile & settings</option>
+            <option value="calendar">Calendar</option>
+            <option value="jobs">Jobs & applications</option>
+            <option value="wallet">Wallet & payments</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="email">Email</label>
+          <input id="email" class="input" type="email" placeholder="name@university.edu" required />
+        </div>
+        <div class="field">
+          <label class="label" for="message">Message</label>
+          <textarea id="message" class="textarea" placeholder="Tell us what’s happening…" required></textarea>
+        </div>
+        <div class="actions">
+          <button type="reset" class="btn">Clear</button>
+          <button type="submit" class="btn primary">Send message</button>
+        </div>
+        <div class="results" id="contactResult" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <span class="tag"><span class="dot" aria-hidden="true"></span> UniWork status: All systems operational</span>
+    </footer>
+  </main>
+
+  <script>
+    // FAQ toggle (accessible)
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const button = item.querySelector('.faq-button');
+      const content = item.querySelector('.faq-content');
+      const icon = item.querySelector('.faq-icon');
+
+      const toggle = () => {
+        const isOpen = item.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(isOpen));
+        icon.textContent = isOpen ? '–' : '+';
+        // Smooth expand based on content height
+        content.style.maxHeight = isOpen ? content.scrollHeight + 'px' : '0';
+      };
+
+      button.addEventListener('click', toggle);
+      button.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
+    });
+
+    // Search across FAQs and Getting Started text
+    const searchForm = document.getElementById('searchForm');
+    const searchInput = document.getElementById('searchInput');
+    const results = document.getElementById('results');
+
+    const index = [
+      { title: 'Reset password', text: 'Forgot password flow, email verification, login issues', anchor: '#faqs' },
+      { title: 'Profile completion', text: 'Contact number, skills, education, photo, wallet setup', anchor: '#faqs' },
+      { title: 'Calendar events', text: 'Add events, tags, dots, highlights, deadlines', anchor: '#faqs' },
+      { title: 'Wallet currency', text: 'LKR balance, transactions, export statements', anchor: '#faqs' },
+      { title: 'Apply for jobs', text: 'Filter listings, review details, attach resume, click Apply', anchor: '#faqs' },
+      { title: 'Create account', text: 'Sign up with university email, verify, login', anchor: '#getting-started' },
+      { title: 'Explore dashboard', text: 'Calendar, notifications, jobs, wallet in LKR', anchor: '#getting-started' },
+      { title: 'Contact support', text: 'Describe issue, screenshots, steps to reproduce', anchor: '#contact' },
+    ];
+
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const q = searchInput.value.trim().toLowerCase();
+      results.innerHTML = '';
+      if (!q) return;
+
+      const matches = index.filter(item =>
+        item.title.toLowerCase().includes(q) || item.text.toLowerCase().includes(q)
+      );
+
+      if (matches.length === 0) {
+        results.innerHTML = '<div class="result">No results found. Try different keywords like <b>password</b>, <b>calendar</b>, or <b>wallet</b>.</div>';
+        return;
+      }
+
+      matches.slice(0, 6).forEach(m => {
+        const el = document.createElement('div');
+        el.className = 'result';
+        el.innerHTML = `<b>${m.title}</b><br><span>${m.text}</span><br><br><a class="pill" href="${m.anchor}">Go to section</a>`;
+        results.appendChild(el);
+      });
+    });
+
+    // Contact form validation (demo)
+    const contactForm = document.getElementById('contactForm');
+    const contactResult = document.getElementById('contactResult');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const topic = document.getElementById('topic').value;
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      contactResult.innerHTML = '';
+
+      const errors = [];
+      if (!topic) errors.push('Please select a topic.');
+      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) errors.push('Please enter a valid email.');
+      if (!message || message.length < 10) errors.push('Please provide more details (at least 10 characters).');
+
+      if (errors.length) {
+        contactResult.innerHTML = `<div class="result" style="border-color: rgba(255,92,124,0.5)"><b>Fix the following:</b><br>${errors.map(e => '• ' + e).join('<br>')}</div>`;
+        return;
+      }
+
+      // Simulate success (replace with actual POST to your backend)
+      contactResult.innerHTML = `<div class="result" style="border-color: rgba(46,204,113,0.5)"><b>Message sent</b><br>We’ve received your request about <b>${topic}</b>. We’ll reply to <b>${email}</b> soon.</div>`;
+      contactForm.reset();
+    });
+  </script>
+</body>
+</html>
